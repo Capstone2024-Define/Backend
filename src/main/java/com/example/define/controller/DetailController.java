@@ -2,6 +2,7 @@ package com.example.define.controller;
 
 import com.example.define.Entity.Detail;
 import com.example.define.Entity.DetailPK;
+import com.example.define.vo.DetailVo;
 import com.example.define.service.DetailService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,11 +28,18 @@ public class DetailController {
     }
 
     // POST 로 Detail 추가
-    @PostMapping("/detail")
+    @PostMapping("/detail/insert")
     public ResponseEntity<Detail> insertDetail(@RequestBody Detail detail) {
         Detail saveDetail = detailService.saveDetail(detail);
         return ResponseEntity.ok(saveDetail);
     }
+
+    // xml로 Detail에 insert 테스트
+    @PostMapping("/detail/insert/batis")
+    public void createDetail(@RequestBody DetailVo detailVo) {
+        detailService.createDetail(detailVo);
+    }
+
 
 
     // 테스트용! GET으로 Detail 전체 조회
@@ -41,7 +50,7 @@ public class DetailController {
     }
 
 
-    /*
+
     // GET으로 특정 Detail 조회
     @GetMapping("/detail/{userCode}")
     public ResponseEntity<Detail> getDetail(@PathVariable int userCode) {
@@ -49,5 +58,22 @@ public class DetailController {
                 return detail.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-     */
+
+    // GET으로 특정 Detail 조회 (Batis)
+    @GetMapping("/detail?user_code={userCode}&date={date}")
+    public DetailVo showDetail(@PathVariable int userCode, @PathVariable Date date) {
+        return detailService.getDetailByUserCodeAndDate(userCode, date);
+    }
+
+    @GetMapping("/detail?date={date}")
+    public DetailVo showDetailByDate(@PathVariable Date date) {
+        return detailService.showDetailByDate(date);
+    }
+
+    @GetMapping("/detail?user_code={userCode}")
+    public DetailVo showDetailByUserCode(@PathVariable int userCode) {
+        return detailService.showDetailByUserCode(userCode);
+    }
+
+
 }

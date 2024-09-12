@@ -43,9 +43,9 @@ dependencies {
 
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
+	// xml로 쿼리 동작 테스트 위한 mybatis. JPA 쓸거면 삭제해도 됨.
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+
 }
 
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
