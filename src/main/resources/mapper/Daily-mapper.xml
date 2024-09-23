@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.define.mapper.DailyMapper">
+    <resultMap type="DailyVo" id="DailyMap">
+        <id column="user_code" property="user_code"   />
+        <id column="date" property="date"   />
+        <result column="home" property="home"   />
+        <result column="school" property="school"   />
+        <result column="hospital" property="hospital"   />
+        <result column="summary" property="summary"/>
+        <result column="state" property="state"/>
+    </resultMap>
+
+    <!-- INSERT -->
+    <insert id="insertDaily" parameterType="com.example.define.vo.DailyVo">
+        INSERT INTO dailywrite
+            (date, user_code, home, school, hospital, summary, state)
+        VALUES (#{date}, #{user_code}, #{home},
+                #{school}, #{hospital}, #{summary}, #{state})
+    </insert>
+
+    <!-- SELECT -->
+    <select id="getDailyByUserCodeAndDate" resultType="com.example.define.vo.DailyVo">
+        SELECT *
+        FROM dailywrite
+        WHERE user_code = #{user_code} AND date = #{date}
+    </select>
+
+    <select id="getDailyByUserCode" resultType="com.example.define.vo.DailyVo">
+        SELECT *
+        FROM dailywrite
+        WHERE user_code = #{user_code}
+    </select>
+</mapper>

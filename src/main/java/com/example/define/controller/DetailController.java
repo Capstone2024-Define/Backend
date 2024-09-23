@@ -27,31 +27,28 @@ public class DetailController {
         this.detailService = detailService;
     }
 
-    // POST 로 Detail 추가
+    // POST : Detail 추가 o
     @PostMapping("/detail/insert")
     public ResponseEntity<Detail> insertDetail(@RequestBody Detail detail) {
         Detail saveDetail = detailService.saveDetail(detail);
         return ResponseEntity.ok(saveDetail);
     }
 
-    // xml로 Detail에 insert 테스트
+    // POST : Detail 추가 (Batis) o
     @PostMapping("/detail/insert/batis")
     public void createDetail(@RequestBody DetailVo detailVo) {
         detailService.createDetail(detailVo);
     }
 
 
-
-    // 테스트용! GET으로 Detail 전체 조회
+    // (test) GET : Detail 전체 조회 o
     @GetMapping("/detail/alldetail")
     public ResponseEntity selectallDetail(String userCode) {
         List<Detail> allDatail = detailService.allDetail();
         return ResponseEntity.ok(allDatail);
     }
 
-
-
-    // GET으로 특정 Detail 조회
+    // GET : 특정 Detail 조회 x
     @GetMapping("/detail/{userCode}")
     public ResponseEntity<Detail> getDetail(@PathVariable int userCode) {
         Optional<Detail> detail = detailService.getDetailByUserCode(userCode);
@@ -59,7 +56,7 @@ public class DetailController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // GET으로 특정 Detail 조회 (Batis)
+    // GET : 특정 Detail 조회 (Batis) x
     @GetMapping("/detail?user_code={userCode}&date={date}")
     public DetailVo showDetail(@PathVariable int userCode, @PathVariable Date date) {
         return detailService.getDetailByUserCodeAndDate(userCode, date);
