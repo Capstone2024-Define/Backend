@@ -33,4 +33,9 @@ public class DailyService {
         return dailyMapper.getDailyByUserCode(user_code);
     }
 
+
+    public List<DailyVo> getStateByUserCodeAndMonth(int user_code, String month) {
+        return dailyMapper.getStateByUserCodeAndMonth(user_code, month);
+    }
+
 }

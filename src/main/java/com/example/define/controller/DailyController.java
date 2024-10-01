@@ -26,7 +26,7 @@ public class DailyController {
 
     // GET
     @GetMapping("/records/{user_code}/{date}")
-    public DailyVo showDaily(@PathVariable int user_code, @PathVariable String date ) {
+    public DailyVo showDaily(@PathVariable int user_code, @PathVariable String date) {
         return dailyService.getDailyByUserCodeAndDate(user_code, date);
     }
 
@@ -34,4 +34,10 @@ public class DailyController {
     public List<DailyVo> showDailyByUserCode(@PathVariable int user_code) {
         return dailyService.getDailyByUserCode(user_code);
     }
+
+    @GetMapping("/state/{user_code}/{month}")
+    public List<DailyVo> showDailyByUserCode(@PathVariable int user_code, @PathVariable String month) {
+        return dailyService.getStateByUserCodeAndMonth(user_code, month);
+    }
+
 }

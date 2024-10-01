@@ -32,4 +32,10 @@
         FROM dailywrite
         WHERE user_code = #{user_code}
     </select>
+    
+    <select id="getStateByUserCodeAndMonth" resultType="com.example.define.vo.DailyVo">
+        SELECT date, state
+        FROM dailywrite
+        WHERE user_code = #{user_code} AND date LIKE CONCAT(#{month}, '%')
+    </select>
 </mapper>

@@ -16,4 +16,6 @@ public interface DailyMapper {
     DailyVo getDailyByUserCodeAndDate(int user_code, String date);
 
     List<DailyVo> getDailyByUserCode(int user_code);
+
+    List<DailyVo> getStateByUserCodeAndMonth(int user_code, String month);
 }
