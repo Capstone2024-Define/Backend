@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.define.mapper.UserInfoMapper">
+    <resultMap type="UserInfoVo" id="UserInfoMap">
+        <id column="user_code" property="user_code"   />
+        <result column="user_name" property="user_name"   />
+        <result column="child_name" property="child_name"   />
+        <result column="birth" property="birth"   />
+        <result column="sex" property="sex"/>
+    </resultMap>
+
+    <!-- INSERT -->
+    <insert id="insertUserInfo" parameterType="com.example.define.vo.UserInfoVo">
+        INSERT INTO userinfo
+            (user_code, user_name, child_name, birth, sex)
+        VALUES (#{user_code}, #{user_name},
+                #{child_name}, #{birth}, #{sex})
+    </insert>
+
+    <!-- SELECT -->
+    <select id="getUserInfoByUserCode" resultType="com.example.define.vo.UserInfoVo">
+        SELECT *
+        FROM userinfo
+        WHERE user_code = #{user_code}
+    </select>
+</mapper>

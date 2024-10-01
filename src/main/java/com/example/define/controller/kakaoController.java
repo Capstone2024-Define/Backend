@@ -1,4 +1,6 @@
+/*
 package com.example.define.controller;
+
 
 import com.example.define.kakao.KakaoUserResponse;
 import com.example.define.service.KakaoLoginService;
@@ -21,6 +23,7 @@ public class kakaoController {
         response.sendRedirect(redirectUrl);
     }
 
+    /*
     // token -> 포스트매핑으로
     @GetMapping("/auth/kakao/callback")
     public String kakaoLogin(@RequestParam String code) {
@@ -37,4 +40,6 @@ public class kakaoController {
         return "카카오 로그인 성공! 사용자 고유 ID: " + userInfo;
     }
 
-}
+     */
+
+//}
