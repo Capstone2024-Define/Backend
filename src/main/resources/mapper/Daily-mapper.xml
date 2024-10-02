@@ -39,6 +39,16 @@
         WHERE user_code = #{user_code} AND date LIKE CONCAT(#{month}, '%')
     </select>
 
+    <!-- UPDATE -->
+    <update id="updateDaily" parameterType="com.example.define.vo.DailyVo">
+        UPDATE dailywrite
+        SET home = #{home},
+            school = #{school},
+            hospital = #{hospital},
+            summary = #{summary}
+        WHERE user_code = #{user_code} AND date = #{date}
+    </update>
+
     <!-- DELETE -->
     <delete id="deleteDaily">
         DELETE

@@ -38,6 +38,11 @@ public class DailyService {
         return dailyMapper.getStateByUserCodeAndMonth(user_code, month);
     }
 
+    // UPDATE
+    public void updateDaily(DailyVo dailyVo) {
+        dailyMapper.updateDaily(dailyVo);
+    }
+
     // DELETE
     public void deleteDaily(int user_code, String date) {
         dailyMapper.deleteDaily(user_code, date);

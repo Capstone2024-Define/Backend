@@ -40,6 +40,12 @@ public class DailyController {
         return dailyService.getStateByUserCodeAndMonth(user_code, month);
     }
 
+    // UPDATE
+    @PutMapping("/records/edit/{user_code}/{date}")
+    public void updateDaily(@RequestBody DailyVo dailyVo) {
+        dailyService.updateDaily(dailyVo);
+    }
+
     // DELETE
     @DeleteMapping("/delete/{user_code}/{date}")
     public void deleteDaily(@PathVariable int user_code, @PathVariable String date) {
