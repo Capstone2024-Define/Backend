@@ -38,4 +38,12 @@
         FROM dailywrite
         WHERE user_code = #{user_code} AND date LIKE CONCAT(#{month}, '%')
     </select>
+
+    <!-- DELETE -->
+    <delete id="deleteDaily">
+        DELETE
+        FROM dailywrite
+        WHERE user_code = #{user_code} AND date = #{date}
+    </delete>
+
 </mapper>

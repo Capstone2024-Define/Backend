@@ -40,4 +40,10 @@ public class DailyController {
         return dailyService.getStateByUserCodeAndMonth(user_code, month);
     }
 
+    // DELETE
+    @DeleteMapping("/delete/{user_code}/{date}")
+    public void deleteDaily(@PathVariable int user_code, @PathVariable String date) {
+        dailyService.deleteDaily(user_code, date);
+    }
+
 }
