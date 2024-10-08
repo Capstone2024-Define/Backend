@@ -15,8 +15,8 @@
     <!-- INSERT -->
     <insert id="insertDaily" parameterType="com.example.define.vo.DailyVo">
         INSERT INTO dailywrite
-            (date, user_code, home, school, hospital, summary, state)
-        VALUES (#{date}, #{user_code}, #{home},
+            (user_code, date, home, school, hospital, summary, state)
+        VALUES (#{user_code}, #{date}, #{home},
                 #{school}, #{hospital}, #{summary}, #{state})
     </insert>
 
@@ -55,5 +55,4 @@
         FROM dailywrite
         WHERE user_code = #{user_code} AND date = #{date}
     </delete>
-
 </mapper>

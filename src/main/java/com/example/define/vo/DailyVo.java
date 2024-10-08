@@ -6,6 +6,7 @@ import jakarta.persistence.TemporalType;
 import lombok.Data;
 import java.util.Date;
 
+
 @Data
 public class DailyVo {
     private int user_code;

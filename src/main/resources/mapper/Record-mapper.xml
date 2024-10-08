@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.define.mapper.RecordMapper">
+    <resultMap type="RecordVo" id="DailyMap">
+        <id column="user_code" property="user_code"   />
+        <id column="timestamp" property="timestamp"   />
+        <result column="location" property="location"   />
+        <result column="contents" property="contents"   />
+    </resultMap>
+
+    <!-- INSERT -->
+    <insert id="insertRecord" parameterType="com.example.define.vo.RecordVo">
+        INSERT INTO record
+            (user_code, timestamp, location, contents)
+        VALUES (#{user_code}, #{timestamp}, #{location}, #{contents})
+    </insert>
+
+    <!-- SELECT -->
+    <select id="getRecordByUserCodeAndTimestamp" resultType="com.example.define.vo.RecordVo">
+        SELECT *
+        FROM record
+        WHERE user_code = #{user_code} AND timestamp = #{timestamp}
+    </select>
+
+    <select id="getDailyByUserCode" resultType="com.example.define.vo.RecordVo">
+        SELECT *
+        FROM record
+        WHERE user_code = #{user_code}
+    </select>
+
+    <select id="getStateByUserCodeAndDate" resultType="com.example.define.vo.RecordVo">
+        SELECT *
+        FROM record
+        WHERE user_code = #{user_code} AND timestamp LIKE CONCAT(#{date}, '%')
+    </select>
+
+    <!-- UPDATE -->
+    <update id="updateRecord" parameterType="com.example.define.vo.RecordVo">
+        UPDATE record
+        SET location = #{location},
+            contents = #{contents}
+        WHERE user_code = #{user_code} AND timestamp = #{timestamp}
+    </update>
+
+    <!-- DELETE -->
+    <delete id="deleteRecord">
+        DELETE
+        FROM record
+        WHERE user_code = #{user_code} AND timestamp = #{timestamp}
+    </delete>
+</mapper>

@@ -3,7 +3,6 @@ package com.example.define.mapper;
 import com.example.define.vo.DailyVo;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.Date;
 import java.util.List;
 
 

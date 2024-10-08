@@ -5,13 +5,12 @@ import com.example.define.vo.DailyVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/daily")
 public class DailyController {
-    private DailyService dailyService;
+    private final DailyService dailyService;
 
     @Autowired
     public DailyController(DailyService dailyService) {

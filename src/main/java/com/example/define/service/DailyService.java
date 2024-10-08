@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.define.vo.DailyVo;
 import com.example.define.mapper.DailyMapper;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -14,17 +13,18 @@ public class DailyService {
 
     private final DailyMapper dailyMapper;
 
+    //@Autowired 어노테이션 때도 생성자 1개라서 알아서 의존성 주 입해준댑니다.
     @Autowired
     private DailyService(DailyMapper dailyMapper) {
         this.dailyMapper = dailyMapper;
     }
 
-    // INSERT
+    // POST
     public void insertDaily(DailyVo dailyVo) {
         dailyMapper.insertDaily(dailyVo);
     }
 
-    // SELECT
+    // GET
     public DailyVo getDailyByUserCodeAndDate(int user_code, String date) {
         return dailyMapper.getDailyByUserCodeAndDate(user_code, date);
     }
@@ -38,7 +38,7 @@ public class DailyService {
         return dailyMapper.getStateByUserCodeAndMonth(user_code, month);
     }
 
-    // UPDATE
+    // PUT
     public void updateDaily(DailyVo dailyVo) {
         dailyMapper.updateDaily(dailyVo);
     }
