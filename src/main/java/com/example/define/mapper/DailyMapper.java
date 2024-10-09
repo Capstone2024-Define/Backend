@@ -4,6 +4,7 @@ import com.example.define.vo.DailyVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Mapper
@@ -16,7 +17,7 @@ public interface DailyMapper {
 
     List<DailyVo> getDailyByUserCode(int user_code);
 
-    List<DailyVo> getStateByUserCodeAndMonth(int user_code, String month);
+    List<Map<String, Object>> getStateByUserCodeAndMonth(int user_code, String month);
 
     // UPDATE
     int updateDaily(DailyVo dailyVo);

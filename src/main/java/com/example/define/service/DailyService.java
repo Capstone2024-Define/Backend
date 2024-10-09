@@ -7,6 +7,7 @@ import com.example.define.vo.DailyVo;
 import com.example.define.mapper.DailyMapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DailyService {
@@ -34,7 +35,7 @@ public class DailyService {
     }
 
 
-    public List<DailyVo> getStateByUserCodeAndMonth(int user_code, String month) {
+    public List<Map<String, Object>> getStateByUserCodeAndMonth(int user_code, String month) {
         return dailyMapper.getStateByUserCodeAndMonth(user_code, month);
     }
 

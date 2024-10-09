@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/daily")
@@ -35,12 +36,12 @@ public class DailyController {
     }
 
     @GetMapping("/state/{user_code}/{month}")
-    public List<DailyVo> showDailyByUserCode(@PathVariable int user_code, @PathVariable String month) {
+    public List<Map<String, Object>> showDailyByUserCode(@PathVariable int user_code, @PathVariable String month) {
         return dailyService.getStateByUserCodeAndMonth(user_code, month);
     }
 
     // UPDATE
-    @PutMapping("/records/edit/{user_code}/{date}")
+    @PutMapping("/records/edit")
     public void updateDaily(@RequestBody DailyVo dailyVo) {
         dailyService.updateDaily(dailyVo);
     }
