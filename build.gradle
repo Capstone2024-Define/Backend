@@ -2,12 +2,12 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.0'
 	id 'io.spring.dependency-management' version '1.1.5'
-	id 'war'
+	//id 'war'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-apply plugin: 'war'
+//apply plugin: 'war'
 
 java {
 	sourceCompatibility = '17'
@@ -23,8 +23,12 @@ repositories {
 	mavenCentral()
 }
 
-bootWar.enabled = false
-war.enabled = true
+//bootWar.enabled = false
+//war.enabled = true
+
+bootJar {
+	archiveFileName = 'Define.jar'  // 원하는 JAR 파일 이름을 지정 (필수는 아님)
+}
 
 dependencies {
 	//implementation 'org.springframework.boot:spring-boot-starter-oauth2-authorization-server'
@@ -36,12 +40,16 @@ dependencies {
 	// mysql
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	// RDS 하면서 추가
+	implementation 'mysql:mysql-connector-java:8.0.33'
+
 
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	//providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	//runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
 
 	// xml로 쿼리 동작 테스트 위한 mybatis. JPA 쓸거면 삭제해도 됨.
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
