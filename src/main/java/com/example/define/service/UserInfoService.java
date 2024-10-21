@@ -27,4 +27,9 @@ public class UserInfoService {
     public UserInfoVo getUserInfoByUserCode(int user_code) {
         return userInfoMapper.getUserInfoByUserCode(user_code);
     }
+
+    // UPDATE
+    public void updateUserInfo(UserInfoVo userInfoVo) {
+        userInfoMapper.updateUserInfo(userInfoVo);
+    }
 }

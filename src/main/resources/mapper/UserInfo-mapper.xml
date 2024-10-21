@@ -24,4 +24,15 @@
         FROM userinfo
         WHERE user_code = #{user_code}
     </select>
+
+    <!-- UPDATE -->
+    <update id="updateUserInfo" parameterType="com.example.define.vo.UserInfoVo">
+        UPDATE userinfo
+        SET user_name = #{user_name},
+            child_name = #{child_name},
+            birth = #{birth},
+            sex = #{sex}
+        WHERE user_code = #{user_code}
+    </update>
+
 </mapper>

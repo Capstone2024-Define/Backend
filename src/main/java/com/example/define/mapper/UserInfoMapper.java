@@ -11,4 +11,6 @@ public interface UserInfoMapper {
     // GET
     UserInfoVo getUserInfoByUserCode(int user_code);
 
+    // PUT
+    int updateUserInfo(UserInfoVo userInfoVo);
 }

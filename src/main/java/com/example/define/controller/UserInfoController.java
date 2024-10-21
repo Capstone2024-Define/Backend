@@ -26,4 +26,10 @@ public class UserInfoController {
     public UserInfoVo showUserInfo(@PathVariable int user_code) {
         return userInfoService.getUserInfoByUserCode(user_code);
     }
+
+    // PUT
+    @PutMapping("/edit")
+    public void editUserInfo(@RequestBody UserInfoVo userInfoVo) {
+        userInfoService.updateUserInfo(userInfoVo);
+    }
 }
