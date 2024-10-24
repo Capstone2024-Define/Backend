@@ -34,7 +34,7 @@
     </select>
 
     <select id="getStateByUserCodeAndMonth" resultType="map">
-        SELECT date AS 날짜, state AS 상태
+        SELECT date, state
         FROM dailywrite
         WHERE user_code = #{user_code} AND date LIKE CONCAT(#{month}, '%')
     </select>

@@ -24,7 +24,7 @@
 
     <!-- 월 별 증상 체크 카운트 -->
     <select id="getChecklistFrequencyByMonth" resultType="map">
-        SELECT checklist_item AS 증상, COUNT(*) AS 빈도
+        SELECT checklist_item, COUNT(*) AS frequency
         FROM (
                  SELECT JSON_UNQUOTE(JSON_EXTRACT(checklist, CONCAT('$[', numbers.n, ']'))) AS checklist_item
                  FROM symptomcheck
@@ -40,7 +40,7 @@
                  WHERE user_code = #{user_code} AND DATE_FORMAT(date, '%Y-%m') = #{month}
              ) AS checklist_items
         GROUP BY checklist_item
-        ORDER BY 빈도 DESC;
+        ORDER BY frequency DESC;
     </select>
 
 
