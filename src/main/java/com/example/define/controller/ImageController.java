@@ -20,8 +20,9 @@ public class ImageController {
 
     // POST
     @PostMapping("/post")
-    public List<String> uploadImage (@RequestBody List<MultipartFile> multipartFiles) {
-        return imageService.uploadImage(multipartFiles);
+    public ResponseEntity<?> uploadImage (@RequestParam("multipartFiles") List<MultipartFile> multipartFiles) {
+        imageService.uploadImage(multipartFiles);
+        return ResponseEntity.ok("이미지 업로드 성공");
     }
 
     // DELETE
