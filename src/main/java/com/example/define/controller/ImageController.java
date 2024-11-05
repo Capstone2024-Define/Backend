@@ -27,7 +27,7 @@ public class ImageController {
     }
 
     // GET
-    @GetMapping("/images")
+    @GetMapping("/show")
     public ResponseEntity<List<String>> getImages(
             @RequestParam int user_code, @RequestParam String date) {
         List<String> imageUrls = imageService.showImage(user_code, date);

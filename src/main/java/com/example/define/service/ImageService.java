@@ -51,7 +51,7 @@ public class ImageService {
 
                 // create URL
                 String imageUrl = amazonS3.getUrl(bucket, fileName).toString();
-                imageUrlList.add(fileName);
+                imageUrlList.add(imageUrl);
 
             } catch (IOException e) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드 실패");
