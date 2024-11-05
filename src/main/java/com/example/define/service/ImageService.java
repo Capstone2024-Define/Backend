@@ -113,7 +113,9 @@ public class ImageService {
 
     // URL -> image Name
     private String extractImageNameFromUrl(String imageUrl) {
-        return imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+
+        String bucketUrl = "https://define-bucket.s3.ap-northeast-2.amazonaws.com/";
+        return imageUrl.startsWith(bucketUrl) ? imageUrl.substring(bucketUrl.length()) : imageUrl;
     }
 
 
