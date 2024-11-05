@@ -68,6 +68,12 @@ public class ImageService {
         return imageUrlList;
     }
 
+    // 이미지 조회
+    public List<String> showImage(int user_code, String date) {
+        ImageVo imageVo = imageMapper.getImageByUserCodeAndDate(user_code, date);
+        return imageVo != null? imageVo.getUrl() : List.of();
+    }
+
     // 이미지 삭제 (단건)
     /*
     public void deleteImage(String fileName) {

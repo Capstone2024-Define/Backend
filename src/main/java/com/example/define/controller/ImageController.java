@@ -1,6 +1,7 @@
 package com.example.define.controller;
 
 import com.example.define.service.ImageService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,14 @@ public class ImageController {
     public ResponseEntity<?> uploadImage (@RequestParam("multipartFiles") List<MultipartFile> multipartFiles, int user_code, String date) {
         imageService.uploadImage(multipartFiles, user_code, date);
         return ResponseEntity.ok(date + " 이미지 업로드 성공");
+    }
+
+    // GET
+    @GetMapping("/images")
+    public ResponseEntity<List<String>> getImages(
+            @RequestParam int user_code, @RequestParam String date) {
+        List<String> imageUrls = imageService.showImage(user_code, date);
+        return ResponseEntity.ok(imageUrls);
     }
 
     // DELETE
