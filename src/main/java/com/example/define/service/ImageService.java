@@ -26,6 +26,7 @@ import java.util.UUID;
 public class ImageService {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
+    private final String bucketUrl = "https://" + bucket + "define-bucket.s3.ap-northeast-2.amazonaws.com/";
 
     private final AmazonS3 amazonS3;
     private final ImageMapper imageMapper;
@@ -34,7 +35,7 @@ public class ImageService {
     // 이미지 업로드 (여러 건)
     public List<String> uploadImage(List<MultipartFile> multipartFiles, int user_code, String date) {
         // 파일 이름 리스트 생성
-        List<String> imageUrlList = new ArrayList<>();
+        List<String> fileKeyList = new ArrayList<>();
 
         // 파일 리스트로 넘어온 파일 하나씩 fileNameList에 저장.
         multipartFiles.forEach(file -> {
@@ -50,8 +51,9 @@ public class ImageService {
                         .withCannedAcl(CannedAccessControlList.PublicRead));
 
                 // create URL
-                String imageUrl = amazonS3.getUrl(bucket, fileName).toString();
-                imageUrlList.add(imageUrl);
+                //String imageUrl = amazonS3.getUrl(bucket, fileName).toString();
+                //imageUrlList.add(imageUrl);
+                fileKeyList.add(fileName);
 
             } catch (IOException e) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드 실패");
@@ -62,16 +64,19 @@ public class ImageService {
         ImageVo imageVo = new ImageVo();
         imageVo.setUser_code(user_code);
         imageVo.setDate(date);
-        imageVo.setUrl(imageUrlList);
+        imageVo.setUrl(fileKeyList);
         imageMapper.insertImageName(imageVo);
 
-        return imageUrlList;
+        return fileKeyList;
+        //return imageUrlList;
     }
 
     // 이미지 조회
     public List<String> showImage(int user_code, String date) {
         ImageVo imageVo = imageMapper.getImageByUserCodeAndDate(user_code, date);
-        return imageVo != null? imageVo.getUrl() : List.of();
+        List<String> fileKeyList = imageVo != null? imageVo.getUrl() : List.of();
+
+        return fileKeyList.stream().map(fileKey -> bucketUrl + fileKey).toList();
     }
 
     // 이미지 삭제 (단건)
@@ -87,16 +92,16 @@ public class ImageService {
     public void deleteImage(int user_code, String date) {
 
         ImageVo imageVo = imageMapper.getImageByUserCodeAndDate(user_code, date);
-        List<String> imageUrls = imageVo.getUrl();
+        List<String> fileKeyList = imageVo.getUrl();
+        //List<String> imageUrls = imageVo.getUrl();
 
-        if (imageUrls != null) {
-            imageUrls.forEach(imageUrl -> {
-                String imageName = extractImageNameFromUrl(imageUrl);
+        if (fileKeyList != null) {
+            fileKeyList.forEach(fileKey -> {
                 try {
-                    amazonS3.deleteObject(new DeleteObjectRequest(bucket, imageName));
-                    System.out.println("Deleted file: " + imageName);
+                    amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileKey));
+                    System.out.println("Deleted file: " + fileKey);
                 } catch (Exception e) {
-                    System.err.println("Error deleting file: " + imageName + " - " + e.getMessage());
+                    System.err.println("Error deleting file: " + fileKey + " - " + e.getMessage());
                 }
             });
         }
@@ -117,6 +122,7 @@ public class ImageService {
         String bucketUrl = "https://define-bucket.s3.ap-northeast-2.amazonaws.com/";
         return imageUrl.startsWith(bucketUrl) ? imageUrl.substring(bucketUrl.length()) : imageUrl;
     }
+
 
 
     // 파일 형식 체크
