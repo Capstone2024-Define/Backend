@@ -27,14 +27,14 @@ public class ImageService {
     private final AmazonS3 amazonS3;
 
     // 이미지 업로드 (다수)
-    public List<String> uploadImage(List<MultipartFile> multipartFiles) {
+    public List<String> uploadImage(List<MultipartFile> multipartFiles, int dirName) {
         // 파일 이름 리스트 생성
         List<String> fileNameList = new ArrayList<>();
 
         // 파일 리스트로 넘어온 파일 하나씩 fileNameList에 저장.
         multipartFiles.forEach(file -> {
             // 파일 이름 변경
-            String fileName = createFileName(file.getOriginalFilename());
+            String fileName = dirName + "/" + createFileName(file.getOriginalFilename());
 
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentLength(file.getSize());
@@ -53,7 +53,7 @@ public class ImageService {
     }
 
     // 이미지 파일 삭제.
-    public void deleteFile(String fileName) {
+    public void deleteImage(String fileName) {
         amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
     }
 

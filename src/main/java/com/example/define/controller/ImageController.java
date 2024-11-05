@@ -20,12 +20,17 @@ public class ImageController {
 
     // POST
     @PostMapping("/post")
-    public ResponseEntity<?> uploadImage (@RequestParam("multipartFiles") List<MultipartFile> multipartFiles) {
-        imageService.uploadImage(multipartFiles);
+    public ResponseEntity<?> uploadImage (@RequestParam("multipartFiles") List<MultipartFile> multipartFiles, int user_code) {
+        imageService.uploadImage(multipartFiles, user_code);
         return ResponseEntity.ok("이미지 업로드 성공");
     }
 
     // DELETE
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteImage(@RequestParam("imageName") String imageName) {
+        imageService.deleteImage(imageName);
+        return ResponseEntity.ok("이미지 삭제 완료");
+    }
 
 
 }
