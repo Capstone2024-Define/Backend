@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.define.mapper.ImageMapper">
+    <resultMap type="ImageVo" id="ImageMap">
+        <id column="user_code" property="user_code" />
+        <id column="date" property="date" />
+        <result column="image_name" property="image_name" typeHandler="com.example.define.handler.JsonTypeHandler" /> <!-- JsonTypeHandler 명시 -->
+    </resultMap>
+
+    <!-- INSERT -->
+    <insert id="insertImageName" parameterType="com.example.define.vo.ImageVo">
+        INSERT INTO image
+            (user_code, date, url)
+        VALUES (#{user_code}, #{date}, #{url})
+    </insert>
+
+    <!-- SELECT -->
+    <select id="getImageByUserCodeAndDate" resultType="com.example.define.vo.ImageVo">
+        SELECT *
+        FROM image
+        WHERE user_code = #{user_code} AND date = #{date}
+    </select>
+
+
+    <!-- DELETE -->
+    <delete id="deleteImageName">
+        DELETE
+        FROM image
+        WHERE user_code = #{user_code} AND date = #{date}
+    </delete>
+
+</mapper>
