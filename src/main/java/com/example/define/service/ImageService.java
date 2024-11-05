@@ -26,7 +26,7 @@ import java.util.UUID;
 public class ImageService {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
-    private final String bucketUrl = "https://" + bucket + "define-bucket.s3.ap-northeast-2.amazonaws.com/";
+    private final String bucketUrl = "https://define-bucket.s3.ap-northeast-2.amazonaws.com/";
 
     private final AmazonS3 amazonS3;
     private final ImageMapper imageMapper;
@@ -50,9 +50,6 @@ public class ImageService {
                 amazonS3.putObject(new PutObjectRequest(bucket, fileName, inputStream, metadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
 
-                // create URL
-                //String imageUrl = amazonS3.getUrl(bucket, fileName).toString();
-                //imageUrlList.add(imageUrl);
                 fileKeyList.add(fileName);
 
             } catch (IOException e) {
@@ -68,7 +65,6 @@ public class ImageService {
         imageMapper.insertImageName(imageVo);
 
         return fileKeyList;
-        //return imageUrlList;
     }
 
     // 이미지 조회
@@ -114,23 +110,5 @@ public class ImageService {
     // 이름 랜덤으로 설정 (중복 방지!)
     private String createFileName(String originalFileName) {
         return System.currentTimeMillis() + "_" + originalFileName;
-    }
-
-    // URL -> image Name
-    private String extractImageNameFromUrl(String imageUrl) {
-
-        String bucketUrl = "https://define-bucket.s3.ap-northeast-2.amazonaws.com/";
-        return imageUrl.startsWith(bucketUrl) ? imageUrl.substring(bucketUrl.length()) : imageUrl;
-    }
-
-
-
-    // 파일 형식 체크
-    private String getfileExtension(String fileName) {
-        try {
-            return fileName.substring(fileName.lastIndexOf(".") + 1);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일(" + fileName + ") 입니다.");
-        }
     }
 }
