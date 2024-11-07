@@ -29,16 +29,16 @@ public class ImageController {
     }
 
     // GET
-    @GetMapping("/show")
+    @GetMapping("/show/{user_code}/{date}")
     public ResponseEntity<List<String>> getImages(
-            @RequestParam int user_code, @RequestParam String date) {
+            @PathVariable int user_code, @PathVariable String date) {
         List<String> imageUrls = imageService.showImage(user_code, date);
         return ResponseEntity.ok(imageUrls);
     }
 
-    @GetMapping("/period")
-    public ResponseEntity<List<ImageVo>> getImagesPeroid(@RequestBody periodRequestDto periodDto) {
-        List<ImageVo> imageList = imageService.getImageByPeriod(periodDto.getUser_code(), periodDto.getStart(), periodDto.getEnd());
+    @GetMapping("/period/{user_code}/{start}/{end}")
+    public ResponseEntity<List<ImageVo>> getImagesPeroid(@PathVariable int user_code, @PathVariable String start, @PathVariable String end) {
+        List<ImageVo> imageList = imageService.getImageByPeriod(user_code, start, end);
         return ResponseEntity.ok(imageList);
     }
 

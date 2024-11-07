@@ -42,10 +42,18 @@ public class DailyController {
         return dailyService.getStateByUserCodeAndMonth(user_code, month);
     }
 
+    @GetMapping("/period/{user_code}/{start}/{end}")
+    public List<DailyVo> periodDaily(@PathVariable int user_code, @PathVariable String start, @PathVariable String end) {
+        return dailyService.getDailyByPeriod(user_code, start, end);
+    }
+
+    /*
     @GetMapping("/period")
-    public List<DailyVo> peroidDaily(@RequestBody periodRequestDto periodDto) {
+    public List<DailyVo> periodDaily(@RequestBody periodRequestDto periodDto) {
         return dailyService.getDailyByPeriod(periodDto.getUser_code(), periodDto.getStart(), periodDto.getEnd());
     }
+
+     */
 
     // UPDATE
     @PutMapping("/records/edit")
