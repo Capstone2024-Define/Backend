@@ -22,6 +22,12 @@
         WHERE user_code = #{user_code} AND date = #{date}
     </select>
 
+    <select id="getImageByPeriod" resultType="com.example.define.vo.ImageVo">
+        SELECT *
+        FROM image
+        WHERE user_code = #{user_code} AND date BETWEEN #{start} AND #{end}
+    </select>
+
 
     <!-- DELETE -->
     <delete id="deleteImageName">

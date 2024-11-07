@@ -75,6 +75,10 @@ public class ImageService {
         return fileKeyList.stream().map(fileKey -> bucketUrl + fileKey).toList();
     }
 
+    public ImageVo getImageByPeriod(int user_code, String start, String end) {
+        return imageMapper.getImageByPeriod(user_code, start, end);
+    }
+
     // 이미지 삭제 (단건)
     /*
     public void deleteImage(String fileName) {

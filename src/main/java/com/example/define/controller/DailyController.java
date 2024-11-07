@@ -3,6 +3,7 @@ package com.example.define.controller;
 import com.example.define.service.DailyService;
 import com.example.define.vo.DailyVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,6 +39,11 @@ public class DailyController {
     @GetMapping("/state/{user_code}/{month}")
     public List<Map<String, Object>> showDailyByUserCode(@PathVariable int user_code, @PathVariable String month) {
         return dailyService.getStateByUserCodeAndMonth(user_code, month);
+    }
+
+    @GetMapping("/period")
+    public List<DailyVo> peroidDaily(@RequestBody int user_code, String start, String end) {
+        return dailyService.getDailyByPeriod(user_code, start, end);
     }
 
     // UPDATE

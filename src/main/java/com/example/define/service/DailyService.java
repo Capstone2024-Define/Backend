@@ -39,6 +39,10 @@ public class DailyService {
         return dailyMapper.getStateByUserCodeAndMonth(user_code, month);
     }
 
+    public List<DailyVo> getDailyByPeriod(int user_code, String Start, String End) {
+        return dailyMapper.getDailyByPeriod(user_code, Start, End);
+    }
+
     // PUT
     public void updateDaily(DailyVo dailyVo) {
         dailyMapper.updateDaily(dailyVo);

@@ -1,6 +1,7 @@
 package com.example.define.controller;
 
 import com.example.define.service.ImageService;
+import com.example.define.vo.ImageVo;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,12 @@ public class ImageController {
             @RequestParam int user_code, @RequestParam String date) {
         List<String> imageUrls = imageService.showImage(user_code, date);
         return ResponseEntity.ok(imageUrls);
+    }
+
+    @GetMapping("/peroid")
+    public ResponseEntity<ImageVo> getImagesPeroid(@RequestBody int user_code, String start, String end) {
+        ImageVo imageVo = imageService.getImageByPeriod(user_code, start, end);
+        return ResponseEntity.ok(imageVo);
     }
 
     // DELETE

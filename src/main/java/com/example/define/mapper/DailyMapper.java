@@ -19,6 +19,8 @@ public interface DailyMapper {
 
     List<Map<String, Object>> getStateByUserCodeAndMonth(int user_code, String month);
 
+    List<DailyVo> getDailyByPeriod(int user_code, String start, String end);
+
     // UPDATE
     int updateDaily(DailyVo dailyVo);
 

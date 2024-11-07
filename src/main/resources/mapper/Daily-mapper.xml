@@ -39,6 +39,13 @@
         WHERE user_code = #{user_code} AND date LIKE CONCAT(#{month}, '%')
     </select>
 
+    <select id="getDailyByPeriod" resultType="com.example.define.vo.DailyVo">
+        SELECT *
+        FROM dailywrite
+        WHERE user_code = #{user_code} AND date BETWEEN #{start} AND #{end}
+    </select>
+
+
     <!-- UPDATE -->
     <update id="updateDaily" parameterType="com.example.define.vo.DailyVo">
         UPDATE dailywrite
