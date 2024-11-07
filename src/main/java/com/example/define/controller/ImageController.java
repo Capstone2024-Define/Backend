@@ -23,7 +23,7 @@ public class ImageController {
 
     // POST
     @PostMapping("/post")
-    public ResponseEntity<?> uploadImage (@RequestParam("multipartFiles") List<MultipartFile> multipartFiles, int user_code, String date) {
+    public ResponseEntity<?> uploadImage (@RequestParam("multipartFiles") List<MultipartFile> multipartFiles, @RequestParam("user_code") int user_code, @RequestParam("date") String date) {
         imageService.uploadImage(multipartFiles, user_code, date);
         return ResponseEntity.ok(date + " 이미지 업로드 성공");
     }
