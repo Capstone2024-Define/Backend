@@ -37,14 +37,14 @@ public class ImageController {
     }
 
     @GetMapping("/period/{user_code}/{start}/{end}")
-    public ResponseEntity<List<ImageVo>> getImagesPeroid(@PathVariable int user_code, @PathVariable String start, @PathVariable String end) {
+    public ResponseEntity<List<ImageVo>> getImagesPeriod(@PathVariable int user_code, @PathVariable String start, @PathVariable String end) {
         List<ImageVo> imageList = imageService.getImageByPeriod(user_code, start, end);
         return ResponseEntity.ok(imageList);
     }
 
     // DELETE
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteImage(int user_code, String date) {
+    @DeleteMapping("/delete/{user_code}/{date}")
+    public ResponseEntity<?> deleteImage(@PathVariable int user_code, @PathVariable String date) {
         imageService.deleteImage(user_code, date);
         return ResponseEntity.ok(date + " 이미지 삭제 완료");
     }

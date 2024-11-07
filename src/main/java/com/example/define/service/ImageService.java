@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.example.define.dto.ImageDto;
 import com.example.define.mapper.ImageMapper;
 import com.example.define.vo.ImageVo;
 import lombok.RequiredArgsConstructor;
@@ -77,6 +78,7 @@ public class ImageService {
 
     public List<ImageVo> getImageByPeriod(int user_code, String start, String end) {
         return imageMapper.getImageByPeriod(user_code, start, end);
+
     }
 
     // 이미지 삭제 (단건)
