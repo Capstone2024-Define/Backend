@@ -1,5 +1,6 @@
 package com.example.define.controller;
 
+import com.example.define.dto.periodRequestDto;
 import com.example.define.service.ImageService;
 import com.example.define.vo.ImageVo;
 import lombok.Getter;
@@ -36,8 +37,8 @@ public class ImageController {
     }
 
     @GetMapping("/peroid")
-    public ResponseEntity<ImageVo> getImagesPeroid(@RequestBody int user_code, String start, String end) {
-        ImageVo imageVo = imageService.getImageByPeriod(user_code, start, end);
+    public ResponseEntity<ImageVo> getImagesPeroid(@RequestBody periodRequestDto periodDto) {
+        ImageVo imageVo = imageService.getImageByPeriod(periodDto.getUser_code(), periodDto.getStart(), periodDto.getEnd());
         return ResponseEntity.ok(imageVo);
     }
 

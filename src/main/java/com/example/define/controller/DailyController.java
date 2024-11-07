@@ -1,5 +1,6 @@
 package com.example.define.controller;
 
+import com.example.define.dto.periodRequestDto;
 import com.example.define.service.DailyService;
 import com.example.define.vo.DailyVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,8 @@ public class DailyController {
     }
 
     @GetMapping("/period")
-    public List<DailyVo> peroidDaily(@RequestBody int user_code, String start, String end) {
-        return dailyService.getDailyByPeriod(user_code, start, end);
+    public List<DailyVo> peroidDaily(@RequestBody periodRequestDto periodDto) {
+        return dailyService.getDailyByPeriod(periodDto.getUser_code(), periodDto.getStart(), periodDto.getEnd());
     }
 
     // UPDATE
