@@ -75,7 +75,7 @@ public class ImageService {
         return fileKeyList.stream().map(fileKey -> bucketUrl + fileKey).toList();
     }
 
-    public ImageVo getImageByPeriod(int user_code, String start, String end) {
+    public List<ImageVo> getImageByPeriod(int user_code, String start, String end) {
         return imageMapper.getImageByPeriod(user_code, start, end);
     }
 

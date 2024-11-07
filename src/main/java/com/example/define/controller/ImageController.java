@@ -36,10 +36,10 @@ public class ImageController {
         return ResponseEntity.ok(imageUrls);
     }
 
-    @GetMapping("/peroid")
-    public ResponseEntity<ImageVo> getImagesPeroid(@RequestBody periodRequestDto periodDto) {
-        ImageVo imageVo = imageService.getImageByPeriod(periodDto.getUser_code(), periodDto.getStart(), periodDto.getEnd());
-        return ResponseEntity.ok(imageVo);
+    @GetMapping("/period")
+    public ResponseEntity<List<ImageVo>> getImagesPeroid(@RequestBody periodRequestDto periodDto) {
+        List<ImageVo> imageList = imageService.getImageByPeriod(periodDto.getUser_code(), periodDto.getStart(), periodDto.getEnd());
+        return ResponseEntity.ok(imageList);
     }
 
     // DELETE
