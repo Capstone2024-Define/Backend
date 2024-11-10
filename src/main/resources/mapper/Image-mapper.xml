@@ -5,7 +5,7 @@
     <resultMap type="ImageVo" id="ImageMap">
         <id column="user_code" property="user_code" />
         <id column="date" property="date" />
-        <result column="image_name" property="image_name" typeHandler="com.example.define.handler.JsonTypeHandler" /> <!-- JsonTypeHandler 명시 -->
+        <result column="url" property="url" typeHandler="com.example.define.handler.JsonTypeHandler" /> <!-- JsonTypeHandler 명시 -->
     </resultMap>
 
     <!-- INSERT -->

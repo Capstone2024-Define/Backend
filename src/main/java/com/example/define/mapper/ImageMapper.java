@@ -10,14 +10,14 @@ import java.util.Map;
 @Mapper
 public interface ImageMapper {
     // POST
-    int insertImageName(ImageVo sxCheckVo);
+    int insertImageName(ImageVo imageVo);
 
     // GET
     ImageVo getImageByUserCodeAndDate(int user_code, String date);
     List<ImageVo> getImageByPeriod(int user_code, String start, String end);
 
     // UPDATE
-    int updateUrl(int user_code, String date, List<String> url);
+    int updateUrl(ImageVo imageVo);
 
     // DELETE
     int deleteImagesName(int user_code, String date);

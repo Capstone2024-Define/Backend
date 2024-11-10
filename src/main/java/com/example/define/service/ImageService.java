@@ -83,11 +83,12 @@ public class ImageService {
 
     // 이미지 삭제 (단건)
     public void deleteImage(int user_code, String date, String url) {
-
-        ImageVo imageVo = imageMapper.getImageByUserCodeAndDate(user_code, date);
-        List<String> imageList = imageVo.getUrl();
+        // 해당 이미지 주소 리스트에서 삭제
+        ImageVo updateimageVo = imageMapper.getImageByUserCodeAndDate(user_code, date);
+        List<String> imageList = updateimageVo.getUrl();
         imageList.removeIf(imageUrl -> imageUrl.equals(url));
 
+        // 이미지 삭제
         if(url != null) {
             try {
                 amazonS3.deleteObject(new DeleteObjectRequest(bucket, url));
@@ -97,7 +98,8 @@ public class ImageService {
             }
         }
 
-        imageMapper.updateUrl(user_code, date, imageList);
+        // image DB 수정
+        imageMapper.updateUrl(updateimageVo);
     }
 
     // 이미지 삭제 (여러 건)
