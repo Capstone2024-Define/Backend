@@ -47,6 +47,11 @@ public class DailyController {
         return dailyService.getDailyByPeriod(user_code, start, end);
     }
 
+    @GetMapping("/consecutive/{user_code}")
+    public int getConsecutiveDays(@PathVariable int user_code) {
+        return dailyService.getConsecutiveDays(user_code);
+    }
+
     /*
     @GetMapping("/period")
     public List<DailyVo> periodDaily(@RequestBody periodRequestDto periodDto) {

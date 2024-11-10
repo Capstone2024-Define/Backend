@@ -45,6 +45,18 @@
         WHERE user_code = #{user_code} AND date BETWEEN #{start} AND #{end}
     </select>
 
+    <select id="getConsecutiveDays" resultType="java.lang.Integer">
+        with datewithgap as (
+            select date, row_number() over (order by date) as row_num, datediff(date, '2024-01-01') as date_diff
+            from dailywrite
+            where user_code = #{user_code})
+        select count(*) as consecutive_days
+        from datewithgap
+        where (date_diff - row_num) = (
+            select (date_diff - row_num)
+            from datewithgap
+            where date = (select max(date) from dailywrite where user_code = #{user_code}));
+    </select>
 
     <!-- UPDATE -->
     <update id="updateDaily" parameterType="com.example.define.vo.DailyVo">

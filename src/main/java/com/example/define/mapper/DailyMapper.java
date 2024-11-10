@@ -21,6 +21,8 @@ public interface DailyMapper {
 
     List<DailyVo> getDailyByPeriod(int user_code, String start, String end);
 
+    int getConsecutiveDays(int user_code);
+
     // UPDATE
     int updateDaily(DailyVo dailyVo);
 

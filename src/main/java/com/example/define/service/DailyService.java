@@ -43,6 +43,10 @@ public class DailyService {
         return dailyMapper.getDailyByPeriod(user_code, start, end);
     }
 
+    public int getConsecutiveDays(int user_code) {
+        return dailyMapper.getConsecutiveDays(user_code);
+    }
+
     // PUT
     public void updateDaily(DailyVo dailyVo) {
         dailyMapper.updateDaily(dailyVo);
