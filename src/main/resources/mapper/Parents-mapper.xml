@@ -22,6 +22,12 @@
         WHERE user_code = #{user_code} AND date = #{date}
     </select>
 
+    <select id="recentParents" resultType="com.example.define.vo.PrntCheckVo">
+        select checklist from parentscheck where date = (select max(date) from parentscheck);
+        SELECT checklist
+        FROM parentscheck
+        WHERE user_code = ${user_code} AND date = (select max(date) from parentscheck);
+    </select>
 
     <!-- DELETE -->
     <delete id="deleteParents">

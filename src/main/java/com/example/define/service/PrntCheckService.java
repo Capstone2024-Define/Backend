@@ -24,6 +24,10 @@ public class PrntCheckService {
         return prntCheckMapper.getParentsByUserCodeAndDate(user_code, date);
     }
 
+    public PrntCheckVo recentParents(int user_code) {
+        return prntCheckMapper.recentParents(user_code);
+    }
+
     // DELETE
     public void deletePrntCheck(int user_code, String date) {
         prntCheckMapper.deleteParents(user_code, date);

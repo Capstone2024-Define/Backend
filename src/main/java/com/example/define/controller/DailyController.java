@@ -52,14 +52,6 @@ public class DailyController {
         return dailyService.getConsecutiveDays(user_code);
     }
 
-    /*
-    @GetMapping("/period")
-    public List<DailyVo> periodDaily(@RequestBody periodRequestDto periodDto) {
-        return dailyService.getDailyByPeriod(periodDto.getUser_code(), periodDto.getStart(), periodDto.getEnd());
-    }
-
-     */
-
     // UPDATE
     @PutMapping("/records/edit")
     public void updateDaily(@RequestBody DailyVo dailyVo) {

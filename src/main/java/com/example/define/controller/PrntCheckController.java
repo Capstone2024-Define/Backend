@@ -28,6 +28,12 @@ public class PrntCheckController {
         return prntCheckService.showPrntCheck(user_code, date);
     }
 
+    @GetMapping("/recent/{user_code}")
+    PrntCheckVo recentParents(@PathVariable int user_code) {
+        return prntCheckService.recentParents(user_code);
+    }
+
+
     // DELETE
     @DeleteMapping("delete/{user_code}/{date}")
     public void deletePrntCheck(@PathVariable int user_code, @PathVariable String date) {
