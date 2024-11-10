@@ -29,7 +29,7 @@ public class PrntCheckController {
     }
 
     @GetMapping("/recent/{user_code}")
-    PrntCheckVo recentParents(@PathVariable int user_code) {
+    String recentParents(@PathVariable int user_code) {
         return prntCheckService.recentParents(user_code);
     }
 

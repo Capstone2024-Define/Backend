@@ -11,7 +11,7 @@ public interface PrntCheckMapper {
     // GET
     PrntCheckVo getParentsByUserCodeAndDate(int user_code, String date);
 
-    PrntCheckVo recentParents(int user_code);
+    String recentParents(int user_code);
 
     // DELETE
     int deleteParents(int user_code, String date);

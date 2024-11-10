@@ -24,7 +24,7 @@ public class PrntCheckService {
         return prntCheckMapper.getParentsByUserCodeAndDate(user_code, date);
     }
 
-    public PrntCheckVo recentParents(int user_code) {
+    public String recentParents(int user_code) {
         return prntCheckMapper.recentParents(user_code);
     }
 
