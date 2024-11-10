@@ -28,6 +28,14 @@
         WHERE user_code = #{user_code} AND date BETWEEN #{start} AND #{end}
     </select>
 
+    <update id="updateUrl" parameterType="com.example.define.vo.ImageVo">
+        UPDATE image
+        SET url = #{url}
+        WHERE user_code = #{user_code} AND date = #{date}
+    </update>
+
+
+
 
     <!-- DELETE -->
     <delete id="deleteImageName">

@@ -16,6 +16,9 @@ public interface ImageMapper {
     ImageVo getImageByUserCodeAndDate(int user_code, String date);
     List<ImageVo> getImageByPeriod(int user_code, String start, String end);
 
+    // UPDATE
+    int updateUrl(int user_code, String date, List<String> url);
+
     // DELETE
-    int deleteImageName(int user_code, String date);
+    int deleteImagesName(int user_code, String date);
 }

@@ -82,20 +82,29 @@ public class ImageService {
     }
 
     // 이미지 삭제 (단건)
-    /*
-    public void deleteImage(String fileName) {
+    public void deleteImage(int user_code, String date, String url) {
 
-        amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
+        ImageVo imageVo = imageMapper.getImageByUserCodeAndDate(user_code, date);
+        List<String> imageList = imageVo.getUrl();
+        imageList.removeIf(imageUrl -> imageUrl.equals(url));
+
+        if(url != null) {
+            try {
+                amazonS3.deleteObject(new DeleteObjectRequest(bucket, url));
+                System.out.println("Deleted file: " + url);
+            } catch (Exception e) {
+                System.err.println("Error deleting file: " + url + " - " + e.getMessage());
+            }
+        }
+
+        imageMapper.updateUrl(user_code, date, imageList);
     }
-    
-     */
 
     // 이미지 삭제 (여러 건)
-    public void deleteImage(int user_code, String date) {
+    public void deleteImages(int user_code, String date) {
 
         ImageVo imageVo = imageMapper.getImageByUserCodeAndDate(user_code, date);
         List<String> fileKeyList = imageVo.getUrl();
-        //List<String> imageUrls = imageVo.getUrl();
 
         if (fileKeyList != null) {
             fileKeyList.forEach(fileKey -> {
@@ -109,7 +118,7 @@ public class ImageService {
         }
 
         // DB DELETE
-        imageMapper.deleteImageName(user_code, date);
+        imageMapper.deleteImagesName(user_code, date);
     }
     
 
