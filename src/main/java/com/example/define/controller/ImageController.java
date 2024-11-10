@@ -44,7 +44,7 @@ public class ImageController {
 
     // DELETE
     // 단건삭제
-    @DeleteMapping("/edit/{user_code}/{date}")
+    @PutMapping("/edit/{user_code}/{date}")
     public ResponseEntity<?> deleteImage(@PathVariable int user_code, @PathVariable String date, @RequestHeader String url) {
         imageService.deleteImage(user_code, date, url);
         return ResponseEntity.ok(date + "이미지 리스트 수정 완료");
