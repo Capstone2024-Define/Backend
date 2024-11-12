@@ -17,6 +17,8 @@ public interface SxCheckMapper {
 
     List<Map<String, Object>> getChecklistFrequencyByMonth(int user_code, @Param("month") String month);
 
+    List<SxCheckVo> getSxByWeek(int user_code, String start, String end);
+
     // DELETE
     int deleteSx(int user_code, String date);
 }

@@ -31,6 +31,10 @@ public class SxCheckService {
         return sxCheckMapper.getChecklistFrequencyByMonth(user_code, month);
     }
 
+    public List<SxCheckVo> getSxByWeek(int user_code, String start, String end) {
+        return sxCheckMapper.getSxByWeek(user_code, start, end);
+    }
+
 
     // DELETE
     public int deleteSx(int user_code, String date) {

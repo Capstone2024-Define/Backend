@@ -38,6 +38,13 @@ public class SxCheckController {
         return sxCheckService.countSx(user_code, month);
     }
 
+    @GetMapping("/week/{user_code}")
+    public List<SxCheckVo> getSxByWeek (@PathVariable int user_code,
+                                        @RequestHeader("start") String start,
+                                        @RequestHeader("end") String end) {
+        return sxCheckService.getSxByWeek(user_code, start, end);
+    }
+
     // DELETE
     @DeleteMapping("delete/{user_code}/{date}")
     public int deletePrntCheck(@PathVariable int user_code, @PathVariable String date) {

@@ -43,6 +43,12 @@
         ORDER BY frequency DESC;
     </select>
 
+    <select id="getSxByWeek" resultType="com.example.define.vo.SxCheckVo">
+        SELECT *
+        FROM symptomcheck
+        WHERE user_code = #{user_code} AND date BETWEEN #{start} AND #{end}
+    </select>
+
 
     <!-- DELETE -->
     <delete id="deleteSx">
