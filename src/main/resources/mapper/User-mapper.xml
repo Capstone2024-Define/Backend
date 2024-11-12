@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.define.mapper.UserMapper">
-    <resultMap type="UserDto" id="UserMap">
+    <resultMap type="UserResponseDto" id="UserMap">
         <id column="user_code" property="user_code"   />
         <result column="kakao_code" property="kakao_code"   />
     </resultMap>
@@ -21,14 +21,5 @@
         WHERE kakao_code = #{kakao_code}
     </select>
 
-    <!-- UPDATE -->
-    <update id="updateUser" parameterType="com.example.define.dto.UserResponseDto">
-        UPDATE userinfo
-        SET user_name = #{user_name},
-            child_name = #{child_name},
-            birth = #{birth},
-            sex = #{sex}
-        WHERE user_code = #{user_code}
-    </update>
 
 </mapper>
