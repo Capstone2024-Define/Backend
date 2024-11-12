@@ -38,6 +38,7 @@ public class SxCheckController {
         return sxCheckService.countSx(user_code, month);
     }
 
+    // 정보 위한 주간기록.
     @GetMapping("/week/{user_code}")
     public List<SxCheckVo> getSxByWeek (@PathVariable int user_code,
                                         @RequestHeader("start") String start,
