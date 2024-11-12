@@ -40,14 +40,27 @@ public class OAuthService {
         return userMapper.findUserByKaKaoCode(kakao_code);
     }
 
+    public String getRedirectUri() {
+        // 환경 변수에서 서버 IP 가져오기
+        String serverIp = System.getenv("SERVER_IP");
+
+        if (serverIp == null || serverIp.isEmpty()) {
+            throw new IllegalArgumentException("환경 변수 SERVER_IP가 설정되지 않았습니다.");
+        }
+
+        // 리다이렉트 URI 설정
+        String redirectUri = "http://" + serverIp + ":8080/Login";
+        return redirectUri;
+    }
+
 
     public String getKaKaoAccessToken(String code) {
         String access_token = "";
         String refresh_token = "";
         String reqURL = "https://kapi.kakao.com/v2/user/me";
 
-        String client_id = ""; // TODO REST_API_KEY
-        String redirect_uri = ""; // TODO 인가코드 받은 RedirectURI
+        String client_id = "5757072cc0c10be2da7715dedd4429d8"; // REST_API_KEY
+        String redirect_uri = getRedirectUri();                // 인가코드 받은 RedirectURI
 
         try {
             URL url = new URL(reqURL);
