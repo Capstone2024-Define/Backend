@@ -34,11 +34,8 @@
         WHERE user_code = #{user_code} AND date = #{date}
     </update>
 
-
-
-
     <!-- DELETE -->
-    <delete id="deleteImageName">
+    <delete id="deleteImagesName">
         DELETE
         FROM image
         WHERE user_code = #{user_code} AND date = #{date}
