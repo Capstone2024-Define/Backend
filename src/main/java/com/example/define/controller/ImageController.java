@@ -1,6 +1,5 @@
 package com.example.define.controller;
 
-import com.example.define.dto.periodRequestDto;
 import com.example.define.service.ImageService;
 import com.example.define.vo.ImageVo;
 import lombok.Getter;

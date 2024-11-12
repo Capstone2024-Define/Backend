@@ -5,7 +5,6 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.example.define.dto.ImageDto;
 import com.example.define.mapper.ImageMapper;
 import com.example.define.vo.ImageVo;
 import lombok.RequiredArgsConstructor;

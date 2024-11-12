@@ -1,5 +1,5 @@
 package com.example.define.service;
-
+/*
 import com.example.define.kakao.KakaoTokenResponse;
 import com.example.define.kakao.KakaoUserResponse;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-/*
+
 @RequiredArgsConstructor
 @Service
 @Slf4j

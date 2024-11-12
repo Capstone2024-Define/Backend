@@ -1,6 +1,5 @@
 package com.example.define.controller;
 
-import com.example.define.dto.periodRequestDto;
 import com.example.define.service.DailyService;
 import com.example.define.vo.DailyVo;
 import org.springframework.beans.factory.annotation.Autowired;
