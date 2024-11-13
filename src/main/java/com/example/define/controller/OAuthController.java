@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class OAuthController {
     private OAuthService oauthService;
 
@@ -18,7 +20,6 @@ public class OAuthController {
         this.oauthService = oauthService;
     }
 
-    @ResponseBody
     @GetMapping("/kakao")
     public ResponseEntity<UserKaKaoLoginResponseDto> kakaoCallback(/*@ApiParam(value = "kakao auth code", required = true)*/
                               @RequestParam String code) {
