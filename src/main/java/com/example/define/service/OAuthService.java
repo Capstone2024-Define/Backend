@@ -83,6 +83,10 @@ public class OAuthService {
             // code <200>? ok
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode: " + responseCode);
+            if (responseCode != 200) {
+                throw new IOException("카카오 서버 오류: 응답 코드 " + responseCode);
+            }
+
             // require -> READ response message(json)
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line = "";
@@ -108,6 +112,7 @@ public class OAuthService {
 
         } catch (IOException e) {
             e.printStackTrace();
+            throw new RuntimeException("카카오 액세스 토큰을 가져오는 데 실패했습니다.", e);
         }
         return access_token;
     }
@@ -126,6 +131,10 @@ public class OAuthService {
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode: " + responseCode);
 
+            if (responseCode != 200) {
+                throw new IOException("카카오 사용자 정보 조회 실패: 응답 코드 " + responseCode);
+            }
+
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line = "";
             String result = "";
@@ -141,6 +150,7 @@ public class OAuthService {
             String id = element.getAsJsonObject().get("id").getAsString();
 
             // 추가 필요한 정보들
+            /*
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
@@ -150,13 +160,15 @@ public class OAuthService {
                 userInfo.put("email", email);
             }
             userInfo.put("nickname", nickname);
-
+             */
 
             // 유저 식별할 id니까 필수!
             userInfo.put("id", id);
 
         } catch (IOException e) {
             e.printStackTrace();
+            System.err.println("사용자 정보를 가져오는 데 실패했습니다: " + e.getMessage());
+            throw new RuntimeException("카카오 사용자 정보를 가져오는 데 실패했습니다.", e);
         }
         return userInfo;
     }
@@ -176,22 +188,26 @@ public class OAuthService {
             userResponseDto = getUser(kakao_code);  // 새로 가입된 사용자 정보 조회
         }
 
-        // 4. JWT 토큰 발급
-        String token = jwtTokenProvider.createToken(userResponseDto.getUser_code().toString());  // 고유 ID로 토큰 생성
+        // 4. JWT 토큰 발급 : 고유 ID로 토큰 생성
+        String token;
+        try {
+            token = jwtTokenProvider.createToken(userResponseDto.getUser_code().toString());
+        } catch (Exception e) {
+            throw new RuntimeException("JWT 토큰 생성에 실패했습니다.", e);
+        }
+
         return new UserKaKaoLoginResponseDto(HttpStatus.OK, token, userResponseDto.getUser_code().toString());
     }
 
     public Long signUp(UserResponseDto userResponseDto){
-        Long userCode;
         try {
             insertUser(userResponseDto);
-
             // 저장 후 자동 생성된 user_code 반환
             UserResponseDto savedUser = getUser(userResponseDto.getKakao_code());
             return savedUser.getUser_code();
         } catch (Exception e) {
             System.out.println("사용자 저장 실패: " + e.getMessage());
-            return null;
+            throw new RuntimeException("사용자 저장에 실패했습니다.", e);
         }
     }
 
