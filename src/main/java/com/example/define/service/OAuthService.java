@@ -57,7 +57,7 @@ public class OAuthService {
     public String getKaKaoAccessToken(String code) {
         String access_token = "";
         String refresh_token = "";
-        String reqURL = "https://kapi.kakao.com/v2/user/me";
+        String reqURL = "https://kauth.kakao.com/oauth/token";
 
         String client_id = "5757072cc0c10be2da7715dedd4429d8"; // REST_API_KEY
         String redirect_uri = getRedirectUri();                // 인가코드 받은 RedirectURI
@@ -119,7 +119,8 @@ public class OAuthService {
 
     public HashMap<String, Object> getUserKakaoInfo(String access_Token) {
         HashMap<String, Object> userInfo = new HashMap<String, Object>();
-        String reqURL = "https://kapi.kakao.com/v2/user/me";
+        //String reqURL = "https://kapi.kakao.com/v2/user/me";
+        String reqURL = "https://kauth.kakao.com/oauth/token";
         try {
             URL url = new URL(reqURL);
 
@@ -150,6 +151,7 @@ public class OAuthService {
             String id = element.getAsJsonObject().get("id").getAsString();
 
             // 추가 필요한 정보들
+
             /*
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
@@ -160,6 +162,7 @@ public class OAuthService {
                 userInfo.put("email", email);
             }
             userInfo.put("nickname", nickname);
+
              */
 
             // 유저 식별할 id니까 필수!
