@@ -20,7 +20,7 @@ public class OAuthController {
         this.oauthService = oauthService;
     }
 
-    @GetMapping("/kakao")
+    @GetMapping("/Login")
     public ResponseEntity<UserKaKaoLoginResponseDto> kakaoCallback(/*@ApiParam(value = "kakao auth code", required = true)*/
                               @RequestParam String code) {
         String accessToken = oauthService.getKaKaoAccessToken(code);
