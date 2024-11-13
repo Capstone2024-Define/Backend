@@ -12,12 +12,13 @@ public class JwtTokenProvider {
 
     @Value("${jwt.secret}")
     private String secretKey;
-    private final long validityInMilliseconds = 3600000; // 1hours
+    @Value("${expiration}")
+    private long expiration;
 
     // JWT token 생성 메서드
     public String createToken(String userId) {
         Date now = new Date();
-        Date validity = new Date(now.getTime() + validityInMilliseconds);
+        Date validity = new Date(now.getTime() + expiration);
 
         return Jwts.builder()
                 .setSubject(userId)
