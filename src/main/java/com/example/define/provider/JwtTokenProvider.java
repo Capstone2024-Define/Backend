@@ -12,7 +12,7 @@ public class JwtTokenProvider {
 
     @Value("${jwt.secret}")
     private String secretKey;
-    @Value("${expiration}")
+    @Value("${jwt.expiration}")
     private long expiration;
 
     // JWT token 생성 메서드
