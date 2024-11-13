@@ -119,8 +119,7 @@ public class OAuthService {
 
     public HashMap<String, Object> getUserKakaoInfo(String access_Token) {
         HashMap<String, Object> userInfo = new HashMap<String, Object>();
-        //String reqURL = "https://kapi.kakao.com/v2/user/me";
-        String reqURL = "https://kauth.kakao.com/oauth/token";
+        String reqURL = "https://kapi.kakao.com/v2/user/me";
         try {
             URL url = new URL(reqURL);
 
