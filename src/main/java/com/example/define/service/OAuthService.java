@@ -7,6 +7,7 @@ import com.example.define.provider.JwtTokenProvider;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -58,7 +59,6 @@ public class OAuthService {
         String access_token = "";
         String refresh_token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
-
         String client_id = "5757072cc0c10be2da7715dedd4429d8"; // REST_API_KEY
         String redirect_uri = getRedirectUri();                // 인가코드 받은 RedirectURI
 
@@ -118,19 +118,16 @@ public class OAuthService {
     }
 
     public HashMap<String, Object> getUserKakaoInfo(String access_Token) {
-        HashMap<String, Object> userInfo = new HashMap<String, Object>();
+        HashMap<String, Object> userInfo = new HashMap<>();
         String reqURL = "https://kapi.kakao.com/v2/user/me";
         try {
             URL url = new URL(reqURL);
-
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-
             conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode: " + responseCode);
-
             if (responseCode != 200) {
                 throw new IOException("카카오 사용자 정보 조회 실패: 응답 코드 " + responseCode);
             }
@@ -175,7 +172,7 @@ public class OAuthService {
         return userInfo;
     }
 
-    public UserKaKaoLoginResponseDto kakaoLogin(String accessToken) {
+    public UserKaKaoLoginResponseDto kakaoLogin(String accessToken, HttpSession session) {
         // 1. 카카오 사용자 정보 가져오기 (고유 ID만 필요)
         HashMap<String, Object> userInfo = getUserKakaoInfo(accessToken);
         String kakao_code = userInfo.get("id").toString(); // 카카오 고유 ID
@@ -191,15 +188,44 @@ public class OAuthService {
         }
 
         // 4. JWT 토큰 발급 : 고유 ID로 토큰 생성
+        /*
         String token;
         try {
             token = jwtTokenProvider.createToken(userResponseDto.getUser_code().toString());
         } catch (Exception e) {
             throw new RuntimeException("JWT 토큰 생성에 실패했습니다.", e);
         }
-
         return new UserKaKaoLoginResponseDto(HttpStatus.OK, token, userResponseDto.getUser_code().toString());
+
+         */
+        session.setAttribute("user_code", userResponseDto.getUser_code());
+
+        return new UserKaKaoLoginResponseDto(HttpStatus.OK, null, userResponseDto.getUser_code().toString());
     }
+
+    public void kakaoLogout(String accessToken) {
+        String reqURL = "https://kapi.kakao.com/v1/user/logout";
+
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            // POST
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == 200) {
+                System.out.println("카카오 로그아웃 성공");
+            } else {
+                throw new RuntimeException("카카오 로그아웃 실패: " + responseCode);
+            }
+            conn.disconnect();
+
+        } catch (IOException e) {
+            throw new RuntimeException("카카오 로그아웃 중 오류 발생", e);
+        }
+    }
+
 
     public Long signUp(UserResponseDto userResponseDto){
         try {

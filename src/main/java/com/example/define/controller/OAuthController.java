@@ -3,13 +3,11 @@ package com.example.define.controller;
 import com.example.define.dto.UserKaKaoLoginResponseDto;
 import com.example.define.service.OAuthService;
 import com.example.define.service.PrntCheckService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class OAuthController {
@@ -22,9 +20,15 @@ public class OAuthController {
 
     @GetMapping("/Login")
     public ResponseEntity<UserKaKaoLoginResponseDto> kakaoCallback(/*@ApiParam(value = "kakao auth code", required = true)*/
-                              @RequestParam String code) {
+                              @RequestParam String code, HttpSession session) { // session 추가
         String accessToken = oauthService.getKaKaoAccessToken(code);
-        UserKaKaoLoginResponseDto responseDto = oauthService.kakaoLogin(accessToken);
+        UserKaKaoLoginResponseDto responseDto = oauthService.kakaoLogin(accessToken, session);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
+    @PostMapping("/Logout")
+    public ResponseEntity<String> logout(HttpSession session) {
+        session.invalidate();
+        return new ResponseEntity<>("로그아웃 성공", HttpStatus.OK);
     }
 }
