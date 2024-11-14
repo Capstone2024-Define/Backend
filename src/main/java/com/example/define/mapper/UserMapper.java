@@ -11,5 +11,7 @@ public interface UserMapper {
     // GET
     UserResponseDto findUserByKaKaoCode(String kakao_code);
 
+    int existUserByUserCode(int user_code);
+
     // PUT
 }

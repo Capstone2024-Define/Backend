@@ -18,6 +18,11 @@ public class OAuthController {
         this.oauthService = oauthService;
     }
 
+    @GetMapping("/exist")
+    public int existUser(@RequestParam int user_code) {
+        return oauthService.existUser(user_code);
+    }
+
     @GetMapping("/Login")
     public ResponseEntity<UserKaKaoLoginResponseDto> kakaoCallback(/*@ApiParam(value = "kakao auth code", required = true)*/
                               @RequestParam String code, HttpSession session) { // session 추가

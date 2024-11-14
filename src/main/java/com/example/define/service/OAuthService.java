@@ -41,6 +41,10 @@ public class OAuthService {
         return userMapper.findUserByKaKaoCode(kakao_code);
     }
 
+    public int existUser(int user_code) {
+        return userMapper.existUserByUserCode(user_code);
+    }
+
     public String getRedirectUri() {
         // 환경 변수에서 서버 IP 가져오기
         String serverIp = System.getenv("SERVER_IP");

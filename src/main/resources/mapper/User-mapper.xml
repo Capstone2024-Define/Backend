@@ -21,5 +21,10 @@
         WHERE kakao_code = #{kakao_code}
     </select>
 
+    <select id="existUserByUserCode" resultType="int">
+        SELECT count(*) as exist
+        FROM user
+        WHERE user_code = #{user_code}
+    </select>
 
 </mapper>
