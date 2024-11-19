@@ -24,7 +24,7 @@ public class InfoController {
     public List<InfoVo> showInfoByView() {
         return infoService.getInfoOrderByView();
     }
-    @GetMapping("/show/view")
+    @GetMapping("/show")
     public List<InfoVo> showInfo() {
         return infoService.getInfo();
     }
