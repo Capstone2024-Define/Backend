@@ -27,7 +27,7 @@ public class InfoController {
 
     // PUT
     @PutMapping("/increase")
-    public InfoVo updateInfo(@PathVariable int info_index) {
+    public InfoVo updateInfo(@RequestParam int info_index) {
         return infoService.updateInfo(info_index);
     }
 
