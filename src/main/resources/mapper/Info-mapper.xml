@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.define.mapper.InfoMapper">
+    <resultMap type="InfoVo" id="InfoMap">
+        <id column="info_index" property="info_index"   />
+        <result column="views" property="views"   />
+    </resultMap>
+
+    <!-- INSERT -->
+    <insert id="insertInfo" parameterType="com.example.define.vo.InfoVo">
+        INSERT INTO information
+            (info_index, views)
+        VALUES (#{info_index}, #{views})
+    </insert>
+
+    <!-- SELECT -->
+    <select id="getInfo" resultType="com.example.define.vo.InfoVo">
+        SELECT *
+        FROM information
+        ORDER BY views ASC;
+
+    </select>
+
+    <!-- UPDATE -->
+    <update id="updateInfo" parameterType="com.example.define.vo.InfoVo">
+        UPDATE information
+        SET views = views+1
+        WHERE info_index = #{info_index}
+    </update>
+
+</mapper>
