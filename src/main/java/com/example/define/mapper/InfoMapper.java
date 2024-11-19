@@ -9,8 +9,10 @@ import java.util.List;
 @Mapper
 public interface InfoMapper {
     // GET
+    List<InfoVo> getInfoOrderByView();
+
     List<InfoVo> getInfo();
 
     // PUT
-    InfoVo updateInfo(int info_index);
+    int updateInfo(int info_index);
 }

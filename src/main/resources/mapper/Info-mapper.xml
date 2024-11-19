@@ -7,18 +7,17 @@
         <result column="views" property="views"   />
     </resultMap>
 
-    <!-- INSERT -->
-    <insert id="insertInfo" parameterType="com.example.define.vo.InfoVo">
-        INSERT INTO information
-            (info_index, views)
-        VALUES (#{info_index}, #{views})
-    </insert>
-
     <!-- SELECT -->
-    <select id="getInfo" resultType="com.example.define.vo.InfoVo">
+    <select id="getInfoOrderByView" resultType="com.example.define.vo.InfoVo">
         SELECT *
         FROM information
         ORDER BY views DESC;
+
+    </select>
+
+    <select id="getInfo" resultType="com.example.define.vo.InfoVo">
+        SELECT *
+        FROM information
 
     </select>
 

@@ -19,11 +19,15 @@ public class InfoService {
     }
 
     // GET
+    public List<InfoVo> getInfoOrderByView() {
+        return infoMapper.getInfoOrderByView();
+    }
     public List<InfoVo> getInfo() {
         return infoMapper.getInfo();
     }
+
     // UPDATE
-    public InfoVo updateInfo(int info_index) {
+    public int updateInfo(int info_index) {
         return infoMapper.updateInfo(info_index);
     }
 

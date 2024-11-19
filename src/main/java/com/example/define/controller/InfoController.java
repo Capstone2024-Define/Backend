@@ -20,14 +20,18 @@ public class InfoController {
     }
 
     // GET
-    @GetMapping("/show")
-    public List<InfoVo> showRecord() {
+    @GetMapping("/show/view")
+    public List<InfoVo> showInfoByView() {
+        return infoService.getInfoOrderByView();
+    }
+    @GetMapping("/show/view")
+    public List<InfoVo> showInfo() {
         return infoService.getInfo();
     }
 
     // PUT
     @PutMapping("/increase")
-    public InfoVo updateInfo(@RequestParam int info_index) {
+    public int updateInfo(@RequestParam int info_index) {
         return infoService.updateInfo(info_index);
     }
 
