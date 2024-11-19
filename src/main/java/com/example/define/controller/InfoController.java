@@ -20,7 +20,7 @@ public class InfoController {
     }
 
     // GET
-    @GetMapping("/show/increase")
+    @GetMapping("/show")
     public List<InfoVo> showRecord() {
         return infoService.getInfo();
     }
