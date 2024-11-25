@@ -47,7 +47,8 @@ public class OAuthService {
 
     public String getRedirectUri() {
         // 환경 변수에서 서버 IP 가져오기
-        String serverIp = System.getenv("SERVER_IP");
+        //String serverIp = System.getenv("SERVER_IP");
+        String serverIp = "13.124.165.67";
 
         if (serverIp == null || serverIp.isEmpty()) {
             throw new IllegalArgumentException("환경 변수 SERVER_IP가 설정되지 않았습니다.");
