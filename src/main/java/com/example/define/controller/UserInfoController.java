@@ -27,6 +27,14 @@ public class UserInfoController {
         return userInfoService.getUserInfoByUserCode(user_code);
     }
 
+    @GetMapping("/exist")
+    public int existUser(@RequestParam int user_code) {
+        return userInfoService.existUser(user_code);
+    }
+
+
+
+
     // PUT
     @PutMapping("/edit")
     public void editUserInfo(@RequestBody UserInfoVo userInfoVo) {

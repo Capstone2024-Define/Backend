@@ -28,6 +28,11 @@ public class UserInfoService {
         return userInfoMapper.getUserInfoByUserCode(user_code);
     }
 
+    public int existUser(int user_code) {
+        return userInfoMapper.existUserByUserCode(user_code);
+    }
+
+
     // UPDATE
     public void updateUserInfo(UserInfoVo userInfoVo) {
         userInfoMapper.updateUserInfo(userInfoVo);
